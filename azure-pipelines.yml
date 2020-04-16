@@ -35,7 +35,7 @@ steps:
     REM bazel --version
     REM bazelisk --version
     REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
-    bazelisk build -c opt -c cuda //tensorflow/tools/lib_package:libtensorflow
+    bazelisk build --config=c++17 -c opt //tensorflow/tools/lib_package:libtensorflow
     robocopy bazel-bin/tensorflow/tools/lib_package/libtensorflow.tar.gz $(Build.ArtifactStagingDirectory)
   displayName: 'Build tensorflow'
 
