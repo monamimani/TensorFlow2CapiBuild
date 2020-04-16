@@ -18,7 +18,7 @@ pool:
   vmImage: 'windows-2019'
 
 jobs:
- - job: 'Setup and Compile TensorFlow 2'
+ - job: 'Setup_and_Compile_TensorFlow_2'
    timeoutInMinutes: 240
 
    steps:
