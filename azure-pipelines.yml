@@ -23,10 +23,11 @@ steps:
     restoreKeys: 'TensorFlow2Repo'
 
 - script: git clone --depth 1 --branch v2.1.0 https://github.com/tensorflow/tensorflow.git tf2
-  condition: ne(variables.CACHE_RESTORED, 'false')
+  condition: ne(variables.CACHE_RESTORED, 'true')
   displayName: 'Git clone tensorflow 2'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
+    bazel --version
   displayName: 'Run a multi-line script'
