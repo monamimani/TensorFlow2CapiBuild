@@ -15,12 +15,12 @@ pool:
   vmImage: 'windows-2019'
 
 steps:
-- task: Cache@2
-  inputs:
-    key: 'TensorFlow2Repo'
-    path: '$(Pipeline.Workspace)/tf2'
-    cacheHitVar: 'CACHE_RESTORED'
-    restoreKeys: 'TensorFlow2Repo'
+# - task: Cache@2
+#   inputs:
+#     key: 'TensorFlow2Repo'
+#     path: '$(Pipeline.Workspace)/tf2'
+#     cacheHitVar: 'CACHE_RESTORED'
+#     restoreKeys: 'TensorFlow2Repo'
 
 - script: git clone --depth 1 --branch v2.1.0 https://github.com/tensorflow/tensorflow.git tf2
   condition: ne(variables.CACHE_RESTORED, 'true')
@@ -30,4 +30,5 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
     bazel --version
+    bazelisk --version
   displayName: 'Run a multi-line script'
