@@ -17,32 +17,36 @@ trigger:
 pool:
   vmImage: 'windows-2019'
 
-steps:
-# - task: Cache@2
-#   inputs:
-#     key: 'TensorFlow2Repo'
-#     path: '$(Pipeline.Workspace)/tf2'
-#     cacheHitVar: 'CACHE_RESTORED'
-#     restoreKeys: 'TensorFlow2Repo'
+jobs:
+ - job: 'Setup and Compile TensorFlow 2'
+   timeoutInMinutes: 240
 
-- script: git clone --depth 1 --branch $(tf2GitTag) https://github.com/tensorflow/tensorflow.git tf2
-  condition: ne(variables.CACHE_RESTORED, 'true')
-  displayName: 'Git clone tensorflow 2'
+   steps:
+    # - task: Cache@2
+    #   inputs:
+    #     key: 'TensorFlow2Repo'
+    #     path: '$(Pipeline.Workspace)/tf2'
+    #     cacheHitVar: 'CACHE_RESTORED'
+    #     restoreKeys: 'TensorFlow2Repo'
 
-- script: |
-    pip3 install numpy
-    pip3 install six
-  displayName: 'Install Python dependencies'
+    - script: git clone --depth 1 --branch $(tf2GitTag) https://github.com/tensorflow/tensorflow.git tf2
+      condition: ne(variables.CACHE_RESTORED, 'true')
+      displayName: 'Git clone tensorflow 2'
 
-- script: |
-    cd tf2
-    REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
-    bazelisk build --config=c++17 -c opt //tensorflow/tools/lib_package:libtensorflow
-    robocopy bazel-bin/tensorflow/tools/lib_package/libtensorflow.tar.gz $(Build.ArtifactStagingDirectory)
-  displayName: 'Build tensorflow'
+    - script: |
+        pip3 install numpy
+        pip3 install six
+      displayName: 'Install Python dependencies'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'TensorFlow_$(tf2GitTag)'
-    publishLocation: 'Container'
+    - script: |
+        cd tf2
+        REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
+        bazelisk build -c opt //tensorflow/tools/lib_package:libtensorflow
+        robocopy bazel-bin/tensorflow/tools/lib_package/libtensorflow.tar.gz $(Build.ArtifactStagingDirectory)
+      displayName: 'Build tensorflow'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'TensorFlow_$(tf2GitTag)'
+        publishLocation: 'Container'
