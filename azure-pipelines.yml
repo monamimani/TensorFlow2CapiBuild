@@ -30,12 +30,11 @@ steps:
   displayName: 'Git clone tensorflow 2'
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
     cd tf2
-    bazel --version
-    bazelisk --version
-    #bazelisk test --config opt //tensorflow/tools/lib_package:libtensorflow_test
+    ls
+    REM bazel --version
+    REM bazelisk --version
+    REM bazelisk test --config opt //tensorflow/tools/lib_package:libtensorflow_test
     bazelisk build --config opt //tensorflow/tools/lib_package:libtensorflow
     robocopy bazel-bin/tensorflow/tools/lib_package/libtensorflow.tar.gz $(Build.ArtifactStagingDirectory)
   displayName: 'Build tensorflow'
@@ -43,5 +42,5 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'TensorFlow$(tf2GitTag)'
+    ArtifactName: 'TensorFlow_$(tf2GitTag)'
     publishLocation: 'Container'
