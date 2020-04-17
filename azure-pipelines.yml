@@ -34,8 +34,7 @@ jobs:
       displayName: 'Git clone tensorflow 2'
 
     - script: |
-        pip3 install numpy
-        pip3 install six
+        pip3 install six numpy wheel keras_applications keras_preprocessing --no-deps
       displayName: 'Install Python dependencies'
 
     - script: |
