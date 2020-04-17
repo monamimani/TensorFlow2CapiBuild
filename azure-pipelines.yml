@@ -39,6 +39,7 @@ jobs:
       displayName: 'Install Python dependencies'
 
     - script: |
+        echo %BAZEL_VS%
         cd tf2
         REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
         bazelisk build --config windows --verbose_failures -c opt //tensorflow/tools/lib_package:libtensorflow
