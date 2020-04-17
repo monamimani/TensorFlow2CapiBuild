@@ -41,7 +41,7 @@ jobs:
     - script: |
         cd tf2
         REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
-        bazelisk build -c opt //tensorflow/tools/lib_package:libtensorflow
+        bazelisk build --config=windows -c opt //tensorflow/tools/lib_package:libtensorflow
         robocopy bazel-bin/tensorflow/tools/lib_package/libtensorflow.tar.gz $(Build.ArtifactStagingDirectory)
       displayName: 'Build tensorflow'
 
