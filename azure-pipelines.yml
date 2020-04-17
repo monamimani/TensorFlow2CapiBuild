@@ -40,6 +40,7 @@ jobs:
 
     - script: |
         echo ON
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
         echo %BAZEL_VS%
         SET
         cd tf2
