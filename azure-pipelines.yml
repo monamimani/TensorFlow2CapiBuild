@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 variables:
-  tf2GitTag: v2.1.0
+  tf2GitTag: r2.2
 
 trigger:
   branches:
@@ -40,9 +40,8 @@ jobs:
 
     - script: |
         cd tf2
-        cl --version
         REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
-        REM bazelisk build --config=windows -c opt //tensorflow/tools/lib_package:libtensorflow
+        bazelisk build --config windows --verbose_failures -c opt //tensorflow/tools/lib_package:libtensorflow
         robocopy bazel-bin/tensorflow/tools/lib_package/libtensorflow.tar.gz $(Build.ArtifactStagingDirectory)
       displayName: 'Build tensorflow'
 
