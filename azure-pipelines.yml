@@ -4,7 +4,8 @@
 # https://aka.ms/yaml
 
 variables:
-  tf2GitTag: r2.2
+  tf2GitTag: v2.1.0
+#r2.2
 
 trigger:
   branches:
