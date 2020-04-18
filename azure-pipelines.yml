@@ -43,9 +43,17 @@ jobs:
         echo ON
         REM call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
         echo %BAZEL_VS%
+        SET BAZELISK_HOME="bazelisk"
+        SET USE_BAZEL_VERSION="2.0.0"
         SET BAZEL_VS="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
         SET BAZEL_VC="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC"
         SET
+
+        bazelisk --version
+
+        ls ./bazelisk
+        ls ./bazelisk/bazelisk
+
         cd tf2
         ./configure.cmd
         REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
