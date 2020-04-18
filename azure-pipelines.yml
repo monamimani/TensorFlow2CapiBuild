@@ -47,7 +47,7 @@ jobs:
         SET
         cd tf2
         REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
-        bazelisk build --config=windows --config=c++17 --verbose_failures --define=no_tensorflow_py_deps=true -c opt //tensorflow/tools/lib_package:libtensorflow
+        bazelisk build --config=windows --config=c++17 --verbose_failures --define=no_tensorflow_py_deps=true -c opt -copt=/D_USE_MATH_DEFINES //tensorflow/tools/lib_package:libtensorflow
         robocopy bazel-bin/tensorflow/tools/lib_package/libtensorflow.tar.gz $(Build.ArtifactStagingDirectory)
       displayName: 'Build tensorflow'
 
