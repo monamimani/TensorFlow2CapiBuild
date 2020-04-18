@@ -4,8 +4,8 @@
 # https://aka.ms/yaml
 
 variables:
-  tf2GitTag: v2.2.0-rc3
-#r2.2 v2.1.0
+  tf2GitTag: r2.1
+#r2.2 v2.1.0 v2.2.0-rc3
 
 trigger:
   branches:
@@ -43,7 +43,6 @@ jobs:
         echo ON
         REM call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
         echo %BAZEL_VS%
-        SET BAZELISK_HOME="bazelisk"
         SET USE_BAZEL_VERSION="2.0.0"
         SET BAZEL_VS="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
         SET BAZEL_VC="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC"
@@ -51,8 +50,8 @@ jobs:
 
         bazelisk --version
 
-        ls ./bazelisk
-        ls ./bazelisk/bazelisk
+        ls ./%LOCALAPPDATA%
+        ls ./%LOCALAPPDATA%/bazelisk
 
         cd tf2
         ./configure.cmd
