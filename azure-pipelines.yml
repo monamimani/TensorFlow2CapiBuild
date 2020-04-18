@@ -4,8 +4,8 @@
 # https://aka.ms/yaml
 
 variables:
-  tf2GitTag: v2.1.0
-#r2.2
+  tf2GitTag: r2.1
+#r2.2 v2.1.0
 
 trigger:
   branches:
@@ -30,8 +30,7 @@ jobs:
     #     cacheHitVar: 'CACHE_RESTORED'
     #     restoreKeys: 'TensorFlow2Repo'
 
-# --branch $(tf2GitTag)
-    - script: git clone --depth 1 https://github.com/tensorflow/tensorflow.git tf2
+    - script: git clone --depth 1 --branch $(tf2GitTag) https://github.com/tensorflow/tensorflow.git tf2
       condition: ne(variables.CACHE_RESTORED, 'true')
       displayName: 'Git clone tensorflow 2'
 
