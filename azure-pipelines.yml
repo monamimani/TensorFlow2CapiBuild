@@ -40,8 +40,10 @@ jobs:
 
     - script: |
         echo ON
-        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
+        REM call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
         echo %BAZEL_VS%
+        SET BAZEL_VS "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
+        SET BAZEL_VC "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC"
         SET
         cd tf2
         REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
