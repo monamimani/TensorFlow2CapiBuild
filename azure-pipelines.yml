@@ -43,10 +43,12 @@ jobs:
         echo ON
         REM call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
         echo %BAZEL_VS%
-        SET USE_BAZEL_VERSION="2.0.0"
+        SET USE_BAZEL_VERSION=2.0.0
         SET BAZEL_VS="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
         SET BAZEL_VC="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC"
         SET
+
+        pacman -S git patch unzip
 
         cd tf2
         bazelisk
