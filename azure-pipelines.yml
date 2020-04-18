@@ -35,7 +35,8 @@ jobs:
       displayName: 'Git clone tensorflow 2'
 
     - script: |
-        pip3 install six numpy wheel keras_applications keras_preprocessing opt_einsum pandas protobuf wrapt gast==0.3.3 --no-deps
+        REM pip3 install six numpy wheel keras_applications keras_preprocessing opt_einsum pandas protobuf wrapt gast==0.3.3 --no-deps
+        pip3 install six numpy --no-deps
       displayName: 'Install Python dependencies'
 
     - script: |
@@ -47,7 +48,7 @@ jobs:
         SET
         cd tf2
         REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
-        bazelisk build --copt /D_USE_MATH_DEFINES --config=windows --config=c++17 --verbose_failures --define=no_tensorflow_py_deps=true -c opt //tensorflow/tools/lib_package:libtensorflow
+        bazelisk build -s --config=c++17 --verbose_failures --define=no_tensorflow_py_deps=true -c opt //tensorflow/tools/lib_package:libtensorflow
         robocopy bazel-bin/tensorflow/tools/lib_package/libtensorflow.tar.gz $(Build.ArtifactStagingDirectory)
       displayName: 'Build tensorflow'
 
