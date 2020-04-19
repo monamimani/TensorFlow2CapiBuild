@@ -50,9 +50,10 @@ jobs:
 
         cd tf2
 
-        REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
-        bazelisk build -s --config=windows --verbose_failures --define=no_tensorflow_py_deps=true -c opt --cxxopt=/std:c++14 --host_cxxopt=/std:c++14 --cxxopt=/D_USE_MATH_DEFINES --host_cxxopt=/D_USE_MATH_DEFINES //tensorflow/tools/lib_package:libtensorflow
+        findstr /V "-std=c++14" .bazelrc > .bazelrc
 
+        bazelisk build -s --config=windows --verbose_failures --define=no_tensorflow_py_deps=true -c opt --cxxopt=/std:c++14 --host_cxxopt=/std:c++14 --cxxopt=/D_USE_MATH_DEFINES --host_cxxopt=/D_USE_MATH_DEFINES :LICENSE tensorflow:tensorflow.dll tensorflow:tensorflow_dll_import_lib tensorflow/tools/lib_package:clicenses_generate
+        
         robocopy bazel-bin/tensorflow/tools/lib_package/libtensorflow.tar.gz $(Build.ArtifactStagingDirectory)
       displayName: 'Build tensorflow' 
 
