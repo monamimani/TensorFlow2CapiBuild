@@ -42,7 +42,7 @@ jobs:
     - script: |
         echo ON
         REM call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x64
-        echo %BAZEL_VS%
+
         SET USE_BAZEL_VERSION=2.0.0
         SET BAZEL_VS="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
         SET BAZEL_VC="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC"
@@ -53,17 +53,11 @@ jobs:
 
         cd tf2
 
-        ls %LOCALAPPDATA%
-        ls %LOCALAPPDATA%/bazelisk
-
         REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
-        bazelisk build -s --config=c++17 --config=windows --verbose_failures --define=no_tensorflow_py_deps=true -c opt //tensorflow/tools/lib_package:libtensorflow
-
-        ls %LOCALAPPDATA%
-        ls %LOCALAPPDATA%/bazelisk
+        bazelisk build -s --config=windows --verbose_failures --define=no_tensorflow_py_deps=true -c opt --cxxopt=/std:c++17 --host_cxxopt=/std:c++17 --cxxopt=/D_USE_MATH_DEFINES //tensorflow/tools/lib_package:libtensorflow
 
         robocopy bazel-bin/tensorflow/tools/lib_package/libtensorflow.tar.gz $(Build.ArtifactStagingDirectory)
-      displayName: 'Build tensorflow'
+      displayName: 'Build tensorflow' 
 
     - task: PublishBuildArtifacts@1
       inputs:
