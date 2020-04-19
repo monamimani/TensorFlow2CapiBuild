@@ -52,14 +52,14 @@ jobs:
 
         cd tf2
 
-        ls ./%LOCALAPPDATA%
-        ls ./%LOCALAPPDATA%/bazelisk
+        ls %LOCALAPPDATA%
+        ls %LOCALAPPDATA%/bazelisk
 
         REM bazelisk test -c opt //tensorflow/tools/lib_package:libtensorflow_test
         bazelisk build -s --config=c++17 --verbose_failures --define=no_tensorflow_py_deps=true -c opt //tensorflow/tools/lib_package:libtensorflow
 
-        ls ./%LOCALAPPDATA%
-        ls ./%LOCALAPPDATA%/bazelisk
+        ls %LOCALAPPDATA%
+        ls %LOCALAPPDATA%/bazelisk
 
         robocopy bazel-bin/tensorflow/tools/lib_package/libtensorflow.tar.gz $(Build.ArtifactStagingDirectory)
       displayName: 'Build tensorflow'
