@@ -48,7 +48,7 @@ jobs:
         SET BAZEL_VC="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC"
         SET
 
-        pacman -S git patch unzip
+        REM pacman -S git patch unzip
 
         cd tf2
         bazelisk
