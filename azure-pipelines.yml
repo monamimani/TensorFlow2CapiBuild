@@ -51,7 +51,7 @@ jobs:
         REM pacman -S git patch unzip
 
         cd tf2
-        bazelisk sync
+        bazelisk version
 
         ls ./%LOCALAPPDATA%
         ls ./%LOCALAPPDATA%/bazelisk
